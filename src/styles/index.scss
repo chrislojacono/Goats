@@ -1,7 +1,9 @@
 @import '~@fortawesome/fontawesome-free/css/all.min.css';
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import 'variables';
+@import '/app';
 
 body {
-  background-color: $favColor;
+  background-color: rgb(220, 175, 238);
+  color: rgb(22, 20, 20);
 }
