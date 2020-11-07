@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import goatShape from '../../helpers/propz/goatShape';
 
 class Goat extends Component {
+  static propTypes = {
+    goat: goatShape,
+    removeGoat: PropTypes.func,
+  };
+
   state = {
     isBusy: this.props.goat.isBusy,
   };
@@ -12,7 +19,7 @@ class Goat extends Component {
   };
 
   render() {
-    const { goat } = this.props;
+    const { goat, removeGoat } = this.props;
     const { isBusy } = this.state;
     return (
       <div className='Goat col-3' id={goat.id}>
@@ -25,10 +32,15 @@ class Goat extends Component {
           </div>
           <div className='card-footer'>
             {isBusy ? (
-                <button className='btn btn-info' onClick={this.updateGoat}>Use Goat</button>
+              <button className='btn btn-info' onClick={this.updateGoat}>
+                Use Goat
+              </button>
             ) : (
-              <button className='btn btn-danger' onClick={this.updateGoat}>Goat in Use</button>
+              <button className='btn btn-warning' onClick={this.updateGoat}>
+                Goat in Use
+              </button>
             )}
+            <button id={goat.id} className="btn btn-danger" onClick={(e) => removeGoat(e)}>Remove Goat</button>
           </div>
         </div>
       </div>
