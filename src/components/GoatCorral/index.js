@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import getGoats from '../../helpers/data/goatData';
+import goatData from '../../helpers/data/goatData';
 import Goat from '../Goat';
+import GoatForm from '../GoatForm';
 
 class GoatCorral extends Component {
   state = {
@@ -8,7 +9,19 @@ class GoatCorral extends Component {
   };
 
   componentDidMount() {
-    getGoats().then((response) => {
+    this.loadData();
+  }
+
+  addUpdateGoat = (goatObject) => {
+    goatData.addGoat(goatObject).then((response) => {
+      if (!response.error) {
+        this.loadData();
+      }
+    });
+  }
+
+  loadData = () => {
+    goatData.getGoats().then((response) => {
       this.setState({
         goats: response,
       });
@@ -24,12 +37,15 @@ class GoatCorral extends Component {
 
   render() {
     const { goats } = this.state;
-    const renderGoatToDom = () => goats.map((goat) => <Goat key={goat.id} goat={goat} removeGoat={this.removeGoat} />);
+    const renderGoatToDom = () => goats.map((goat) => <Goat key={goat.id} goat={goat} addUpdateGoat={this.addUpdateGoat} removeGoat={this.removeGoat} />);
 
     return (
+      <>
+      <GoatForm addUpdateGoat={this.addUpdateGoat} goat={''}/>
       <div className="d-flex flex-wrap">
         {renderGoatToDom()}
       </div>
+      </>
     );
   }
 }

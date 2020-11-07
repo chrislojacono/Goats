@@ -1,9 +1,20 @@
 import axios from 'axios';
 
+const baseUrl = 'https://fir-cows-958ae.firebaseio.com/react-goats';
+
 const getGoats = () => new Promise((resolve, reject) => {
-  axios.get('https://fir-cows-958ae.firebaseio.com/react-goats.json').then((response) => {
-    resolve(Object.values(response.data));
-  }).catch((error) => reject(error));
+  axios.get(`${baseUrl}.json`)
+    .then((resp) => {
+      resolve(Object.values(resp.data));
+    }).catch((error) => reject(error));
 });
 
-export default getGoats;
+const addGoat = (goatObj) => new Promise((resolve, reject) => {
+  axios.post(`${baseUrl}.json`, goatObj).then((response) => {
+    axios.patch(`${baseUrl}/${response.data.name}.json`, { id: response.data.name }).then((patchResponse) => {
+      resolve(patchResponse);
+    }).catch((error) => reject(error));
+  });
+});
+
+export default { getGoats, addGoat };
