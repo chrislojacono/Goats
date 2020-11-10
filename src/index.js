@@ -2,12 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.scss';
 import App from './App/index';
-import GoatCorral from './components/GoatCorral/index';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    <GoatCorral />
   </React.StrictMode>,
   document.getElementById('root'),
 );
