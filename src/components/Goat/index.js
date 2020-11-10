@@ -40,16 +40,16 @@ class Goat extends Component {
           </div>
           <div className='card-footer'>
             {isBusy ? (
-              <button className='btn btn-info' onClick={this.updateGoat}>
+              <button className='btn btn-success my-2 btn-block' onClick={this.updateGoat}>
                 Use Goat
               </button>
             ) : (
-              <button className='btn btn-warning' onClick={this.updateGoat}>
+              <button className='btn btn-warning my-2 btn-block' onClick={this.updateGoat}>
                 Goat in Use
               </button>
             )}
-            <button id={goat.id} className="btn btn-danger" onClick={(e) => removeGoat(e)}>Remove Goat</button>
-            <button className="btn btn-info my-2" onClick={this.editGoat}>
+            <button id={goat.id} className="btn btn-danger my-2 btn-block" onClick={(e) => removeGoat(e)}>Remove Goat</button>
+            <button className="btn btn-info my-2 btn-block" onClick={this.editGoat}>
               { edit ? 'CLOSE FORM' : 'EDIT FORM'}
             </button>
             { edit ? (<GoatForm addUpdateGoat={addUpdateGoat} goat={goat}/>) : null }

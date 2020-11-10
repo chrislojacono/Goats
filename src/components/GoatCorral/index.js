@@ -13,11 +13,20 @@ class GoatCorral extends Component {
   }
 
   addUpdateGoat = (goatObject) => {
-    goatData.addGoat(goatObject).then((response) => {
-      if (!response.error) {
-        this.loadData();
-      }
-    });
+    if (goatObject.id === '') {
+      goatData.addGoat(goatObject).then((response) => {
+        if (!response.error) {
+          this.loadData();
+        }
+      });
+    } else {
+      goatData.updateGoat(goatObject).then((response) => {
+        console.warn(goatObject);
+        if (!response.error) {
+          this.loadData();
+        }
+      });
+    }
   }
 
   loadData = () => {
@@ -32,6 +41,9 @@ class GoatCorral extends Component {
     const removedGoat = this.state.goats.filter((goat) => goat.id !== e.target.id);
     this.setState({
       goats: removedGoat,
+    });
+    goatData.deleteGoat(e.target.id).then(() => {
+      this.loadData();
     });
   }
 

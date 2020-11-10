@@ -3,6 +3,7 @@ import { Button, Form, Input } from 'reactstrap';
 
 export default class GoatForm extends Component {
   state = {
+    id: this.props.goat.id || '',
     name: this.props.goat.name || '',
     imgUrl: this.props.goat.imgUrl || '',
     description: this.props.goat.description || '',

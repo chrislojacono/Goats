@@ -17,4 +17,14 @@ const addGoat = (goatObj) => new Promise((resolve, reject) => {
   });
 });
 
-export default { getGoats, addGoat };
+const updateGoat = (goatObj) => new Promise((resolve, reject) => {
+  axios.patch(`${baseUrl}/${goatObj.id}.json`, goatObj).then((response) => {
+    resolve(response);
+  }).catch((error) => reject(error));
+});
+
+const deleteGoat = (goatId) => axios.delete(`${baseUrl}/${goatId}.json`);
+
+export default {
+  getGoats, addGoat, updateGoat, deleteGoat,
+};
